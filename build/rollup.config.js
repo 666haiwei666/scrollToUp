@@ -3,6 +3,8 @@ const { terser } = require('rollup-plugin-terser')
 const scss = require('rollup-plugin-scss')
 const babel = require('rollup-plugin-babel')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
+const postcss = require('postcss')
+const autoprefixer = require('autoprefixer')
 const commonjs = require('@rollup/plugin-commonjs')
 const rootDir = process.cwd()
 
@@ -12,7 +14,7 @@ export default {
     {
       file: path.join(rootDir, 'dist/index.js'),
       name: 'scrollToUp',
-      format: 'es'
+      format: 'umd'
     }
   ],
   plugins: [
@@ -20,9 +22,12 @@ export default {
       preferBuiltins: false
     }),
     commonjs(),
-    babel(),
+    babel({
+      runtimeHelpers: true
+    }),
     terser(),
     scss({
+      processor: () => postcss([autoprefixer()]),
       outputStyle: 'compressed'
     })
   ]

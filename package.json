@@ -1,8 +1,10 @@
 {
   "name": "scrolltoup",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "页面滚动和区域滚动",
-  "main": "dist/index.es.js",
+  "main": "dist/index.js",
+  "unpkg": "dist/index.js",
+  "jsdelivr": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/666haiwei666/scrollToUp.git"
@@ -21,8 +23,9 @@
   },
   "keywords": [
     "scroll",
-    "scrolltoup",
-    "scrollToUp"
+    "scrollToUp",
+    "滚动",
+    "页面滚动"
   ],
   "husky": {
     "hooks": {
@@ -43,6 +46,7 @@
   },
   "homepage": "https://github.com/666haiwei666/scrollToUp#readme",
   "dependencies": {
+    "core-js": "^3.19.3",
     "events": "^3.3.0",
     "prettier": "^1.7.4",
     "throttle-debounce": "^3.0.1"
@@ -51,13 +55,16 @@
     "@babel/core": "^7.16.0",
     "@babel/eslint-parser": "^7.16.3",
     "@babel/plugin-transform-runtime": "^7.16.4",
-    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/runtime-corejs3": "^7.16.5",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^15.0.0",
     "@commitlint/cz-commitlint": "^15.0.0",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.0.6",
+    "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.3",
+    "babel-polyfill": "^6.26.0",
     "commitizen": "^4.2.4",
     "conventional-changelog-cli": "^2.1.1",
     "css-loader": "^6.5.1",
@@ -70,6 +77,7 @@
     "husky": "^4.2.5",
     "lint-staged": "^11.0.0",
     "mini-css-extract-plugin": "^2.4.5",
+    "postcss": "^8.4.5",
     "rollup": "^2.60.2",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-scss": "^2.6.1",

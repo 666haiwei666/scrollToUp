@@ -1,4 +1,4 @@
-#scrollDefaultButton {
+#scroll-default-button {
   position: fixed;
   animation-fill-mode: forwards;
 }
@@ -13,9 +13,11 @@
   opacity: 0.9;
   padding: 10px 20px;
   cursor: pointer;
-  -webkit-border-radius: 16px;
-  -moz-border-radius: 16px;
   border-radius: 16px;
+}
+
+.mobile {
+  display: none !important;
 }
 
 @keyframes fadeIn {
