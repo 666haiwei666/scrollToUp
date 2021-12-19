@@ -1,6 +1,6 @@
 {
   "name": "scrolltoup",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "页面滚动和区域滚动",
   "main": "dist/index.js",
   "unpkg": "dist/index.js",

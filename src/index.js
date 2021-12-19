@@ -25,6 +25,7 @@ class scrollToUp extends events {
     scrollContainer: null,
     scrollButtonDistance: 100,
     scrollButtonBottom: 20,
+    scrollButtonRight: 20,
     // scrollDirection: 'top', // left, right, top, bottom
     scrollButtonText: '回到顶部',
     easingType: 'linear',
@@ -37,6 +38,9 @@ class scrollToUp extends events {
     mobile: false
   }
 
+  clickListenr = null
+  containerScrollListenr = null
+  windowScrollListenr = null
   container = null
   scrollY = 0
   constructor(options = {}) {
@@ -63,7 +67,12 @@ class scrollToUp extends events {
     const { animationDuration } = this.defaultOptions
     const throttleClickFunc = throttle(animationDuration, this.clickEvent)
     this.clickListenr = eventListener(elementNode, 'click', throttleClickFunc)
-    this.scrollListenr = eventListener(this.container, 'scroll', this._onScrollButtonAni)
+    if (this.container !== window) {
+      this.containerScrollListenr = eventListener(this.container, 'scroll', this._onScrollButtonAni)
+      this.windowScrollListenr = eventListener(window, 'scroll', this._onScrollButtonAni)
+    } else {
+      this.containerScrollListenr = eventListener(this.container, 'scroll', this._onScrollButtonAni)
+    }
   }
 
   _createElement() {
@@ -89,7 +98,6 @@ class scrollToUp extends events {
       } else if (scrollContainer.startsWith('#')) {
         const container = document.querySelector(scrollContainer)
         container.appendChild(scrollButton)
-
         this.container = container
         attr.set(this.container, field, true)
         attr.set(this.container, 'style', 'position: relative;')
@@ -126,16 +134,11 @@ class scrollToUp extends events {
       const normalSpeed = (beginVal * easingfunc[easingType](t)) / 10
       const curInter = container.scrollTop - endVal <= 0 ? endVal : container.scrollTop - endVal
       const speed = curInter < normalSpeed ? curInter : normalSpeed
-      const curbottom = Number(elementNode.style.bottom.replace(/px/, ''))
       container.scrollTop -= speed
       context.emit('on-scrolling', this.defaultOptions, elementNode)
-      if (context.container !== window) {
-        elementNode.style.bottom = curbottom + speed + 'px'
-      }
       if (beginVal - container.scrollTop <= endVal && container.scrollTop !== 0) {
         rAF(frameFunc)
       } else {
-        elementNode.style.bottom = '20px'
         context.emit('on-end-scroll', this.defaultOptions, elementNode)
       }
     }
@@ -143,11 +146,10 @@ class scrollToUp extends events {
   }
 
   _onScrollButtonAni() {
-    const { scrollContainer, keyframesIn, keyframesOut, scrollButtonBottom } = context.defaultOptions
-    const { isShowButton, scrollTop } = context.onJudgeShowButton()
+    const { keyframesIn, keyframesOut, scrollButtonBottom, scrollButtonRight } = context.defaultOptions
+    const { isShowButton, pageScrollTop, scrollTop } = context.onJudgeShowButton()
     const direction = context.getDirection(scrollTop)
     let style = {
-      position: !scrollContainer || scrollContainer === window ? '' : 'absolute',
       display: 'block'
     }
     if (isShowButton && direction === 'down') {
@@ -157,30 +159,34 @@ class scrollToUp extends events {
       style = Object.assign(style, { 'animation-name': keyframesOut })
       attr.set(elementNode, 'style', elementNode.style.cssText + styleStr(style))
     }
-    if (context.container !== window) {
-      elementNode.style.bottom = scrollButtonBottom - scrollTop + 'px'
-    }
+    const { bottom, right } = context.container === window ? {} : context.container.getBoundingClientRect()
+    elementNode.style.bottom = window.innerHeight - bottom + pageScrollTop + scrollButtonBottom + 'px'
+    elementNode.style.right = window.innerWidth - right + scrollButtonRight + 'px'
   }
 
   onJudgeShowButton() {
     const { scrollButtonDistance } = context.defaultOptions
-    const scrollTop = context.container === window ? document.documentElement.scrollTop || document.body.scrollTop : context.container.scrollTop
+    const pageScrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    const elScrollTop = context.container ? context.container.scrollTop : 0
+    const scrollTop = context.container === window ? pageScrollTop : elScrollTop
     const dis = scrollButtonDistance || 300
     return {
+      pageScrollTop,
+      elScrollTop,
       scrollTop,
       isShowButton: scrollTop >= dis
     }
   }
 
   _setAnimation() {
-    const { animationDelay, animationDuration, easingType, zIndex, scrollContainer, scrollButtonBottom } = context.defaultOptions
+    const { animationDelay, animationDuration, easingType, zIndex, scrollButtonRight, scrollButtonBottom } = context.defaultOptions
     const style = {
       'z-Index': zIndex,
       'animation-duration': animationDuration + unit,
       'animation-timing-function': easingType,
       'animation-delay': animationDelay + unit,
-      position: !scrollContainer || scrollContainer === window ? '' : 'absolute',
-      bottom: scrollButtonBottom + 'px'
+      bottom: scrollButtonBottom + 'px',
+      right: scrollButtonRight + 'px'
     }
     attr.set(elementNode, 'style', styleStr(style) + elementNode.style.cssText)
   }
@@ -205,6 +211,8 @@ class scrollToUp extends events {
     const { scrollContainer } = this.defaultOptions
     scrollContainer.removeChild(elementNode)
     this.clickListenr.remove()
+    this.containerScrollListenr.remove()
+    this.windowScrollListenr.remove()
   }
 }
 window.scrollToUp = scrollToUp
