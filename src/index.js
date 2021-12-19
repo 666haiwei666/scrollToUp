@@ -160,7 +160,7 @@ class scrollToUp extends events {
       attr.set(elementNode, 'style', elementNode.style.cssText + styleStr(style))
     }
     const { bottom, right } = context.container === window ? {} : context.container.getBoundingClientRect()
-    elementNode.style.bottom = window.innerHeight - bottom + pageScrollTop + scrollButtonBottom + 'px'
+    elementNode.style.bottom = context.container === window ? scrollButtonBottom + 'px' : document.documentElement.scrollHeight - pageScrollTop - bottom + scrollButtonBottom + 'px'
     elementNode.style.right = window.innerWidth - right + scrollButtonRight + 'px'
   }
 
