@@ -1,6 +1,10 @@
 #scroll-default-button {
   position: fixed;
+  z-index: 2147483647;
+  animation-duration: 200ms;
   animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  animation-delay: 0;
 }
 
 .scrollDefaultButtonStyle {
