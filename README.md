@@ -6,8 +6,8 @@
 ## CDN 引入
 
 ```html
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/scrolltoup@0.0.6/dist/index.css" />
-<script src="https://cdn.jsdelivr.net/npm/scrolltoup@0.0.6/dist/index.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/scrolltoup@0.0.8/dist/index.css" />
+<script src="https://cdn.jsdelivr.net/npm/scrolltoup@0.0.8/dist/index.js"></script>
 ```
 
 ## 安装
@@ -86,8 +86,3 @@ scrollToUp.destroyed()
 | startScrollCallBack | 开始滚动 | (1)defaultOptions 基本配置 （2）buttom 节点 |
 | endScrollCallBack   | 正在滚动 | (1)defaultOptions 基本配置 （2）buttom 节点 |
 | endScrollCallBack   | 结束滚动 | (1)defaultOptions 基本配置 （2）buttom 节点 |
-
-## 兼容性
-
-对于区域滚动，使用 getBoundingClientRect 进行定位，因此请配合该 API 的兼容性
-对于页面滚动，则无兼容性要求

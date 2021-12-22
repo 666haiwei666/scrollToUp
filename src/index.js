@@ -109,11 +109,15 @@ class scrollToUp {
       const curInter = container.scrollTop - endVal <= 0 ? endVal : container.scrollTop - endVal
       const speed = curInter < normalSpeed ? curInter : normalSpeed
       container.scrollTop -= speed
-      scrollingCallBack(context.defaultOptions, context.buttonNode)
+      if (scrollingCallBack) {
+        scrollingCallBack(context.defaultOptions, context.buttonNode)
+      }
       if (beginVal - container.scrollTop <= endVal && container.scrollTop !== 0) {
         rAF(frameFunc)
       } else {
-        endScrollCallBack(context.defaultOptions, context.buttonNode)
+        if (endScrollCallBack) {
+          endScrollCallBack(context.defaultOptions, context.buttonNode)
+        }
       }
     }
     rAF(frameFunc)
@@ -164,7 +168,9 @@ class scrollToUp {
 
   clickEvent() {
     const startScrollCallBack = context.defaultOptions.startScrollCallBack
-    startScrollCallBack(context.defaultOptions, context.buttonNode)
+    if (startScrollCallBack) {
+      startScrollCallBack(context.defaultOptions, context.buttonNode)
+    }
     context._scrollEvent()
   }
 
