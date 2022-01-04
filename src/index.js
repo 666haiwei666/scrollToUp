@@ -7,7 +7,7 @@ import isSupportCSS from './utils/isSupportCSS'
 import isNode from './utils/isNode'
 import styleStr from './utils/styleStr'
 import easingfunc from './utils/easingfunc'
-import createScrollButton from './createScrollButton'
+import createScrollButton from './components/scrollButton'
 
 const t = 0.5
 let context = null

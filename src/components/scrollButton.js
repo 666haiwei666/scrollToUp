@@ -1,8 +1,8 @@
-import isMobile from './utils/isMobile'
-import attr from './utils/attr'
-import styleStr from './utils/styleStr'
+import isMobile from '../utils/isMobile'
+import attr from '../utils/attr'
+import styleStr from '../utils/styleStr'
 
-import './index.css'
+import '../index.css'
 
 const pixelUnit = 'px'
 const title = 'scroll to up'
