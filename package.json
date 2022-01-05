@@ -1,6 +1,6 @@
 {
   "name": "scrolltoup",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "页面滚动和区域滚动",
   "main": "dist/index.js",
   "unpkg": "dist/index.js",
@@ -29,7 +29,8 @@
     "scroll",
     "scrollToUp",
     "滚动",
-    "页面滚动"
+    "页面滚动",
+    "区域滚动"
   ],
   "husky": {
     "hooks": {
