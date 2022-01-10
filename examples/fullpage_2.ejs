@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>scrollToUp</title>
+  <link rel="stylesheet" href="<%=css%>" rel="preload" as="css" />
+  <style>
+    html,
+    body {
+      height: 2000px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Please scroll to the bottom of the page</h1>
+  <script src="<%= js %>" rel="preload" as="script"></script>
+  <script>
+    new scrollToUp({
+      customScrollButton: `
+      <div>
+       自定义按钮
+      </div>
+      `
+    })
+  </script>
+</body>
+
+</html>

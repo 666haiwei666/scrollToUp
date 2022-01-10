@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>scrollToUp</title>
+    <style>
+        .container {
+            width: 1100px;
+            margin: 0 auto;
+            margin-bottom: 50px;
+        }
+
+        .examples {
+            display: flex;
+        }
+
+        .examples h4 {
+            text-align: center;
+            flex: 1;
+        }
+
+        h2 {
+            padding: 20px 0;
+        }
+
+        pre {
+            padding: 20px;
+            line-height: 20px;
+            background-color: #f0f0f0;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>简单实例:</h2>
+        <div class="examples">
+            <h4>
+                <p>页面滚动</p>
+                <p><a href="fullpage_1.html">fullpage_1.html(默认不配置)</a></p>
+                <p><a href="fullpage_2.html">fullpage_2.html(自定义button)</a></p>
+                <p><a href="fullpage_3.html">fullpage_3.html(基础配置)</a></p>
+            </h4>
+            <h4>
+                <p>区域滚动</p>
+                <p><a href="block_1.html">block_1.html(默认不配置)</a></p>
+                <p><a href="block_2.html">block_2.html(自定义button)</a></p>
+                <p><a href="block_3.html">block_3.html（基础配置）</a></p>
+            </h4>
+        </div>
+        <div class="introduce">
+            <h2>说明</h2>
+<p>目前只支持“top”方向的滚动，对于其他方向的滚动，后面会陆续更新。
+一个页面只支持使用一次滚动节点</p>
+<h2>CDN 引入</h2>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/npm/scrollToUp@0.0.8/dist/index.css&quot; /&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/scrollToUp@0.0.8/dist/index.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h2>安装</h2>
+<pre><code class="language-bash">npm install scroll-to-up --save
+</code></pre>
+<h2>npm 引入</h2>
+<pre><code class="language-bash">import scrollToUp from 'scroll-to-up'
+</code></pre>
+<h2>如何使用</h2>
+<pre><code class="language-js">let scrollToUp =  new scrollToUp({
+  scrollContainer: '.container',
+  startScrollCallBack: function (options) {
+    console.log('start')
+  },
+  scrollingCallBack: function (options) {
+    console.log('scrolling')
+  },
+  endScrollCallBack: function (options) {
+    console.log('end')
+  },
+})
+</code></pre>
+<h2>基本配置</h2>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scrollTarget</td>
+<td>null（默认值）或 Number</td>
+<td>每次滚动的距离，如果不设置，默认滚动到头部</td>
+</tr>
+<tr>
+<td>scrollContainer</td>
+<td>null （默认值）或 dom 节点</td>
+<td>滚动的容器，如果不设置，默认滚动是 window</td>
+</tr>
+<tr>
+<td>scrollButtonDistance</td>
+<td>Number</td>
+<td>当滚动到多少距离时，按钮开始显示，默认 300</td>
+</tr>
+<tr>
+<td>scrollButtonBottom</td>
+<td>Number</td>
+<td>按钮的 btttom 值</td>
+</tr>
+<tr>
+<td>scrollButtonRight</td>
+<td>Number</td>
+<td>按钮的 right 值 值</td>
+</tr>
+<tr>
+<td>scrollButtonText</td>
+<td>String</td>
+<td>默认是<code>回到顶部</code>, 按钮的文字，如需自定义，请设置</td>
+</tr>
+<tr>
+<td>easingType</td>
+<td>String</td>
+<td>默认是<code>linear</code>,如需自定义，请参考下方列表</td>
+</tr>
+<tr>
+<td>keyframesIn</td>
+<td>String</td>
+<td>默认是<code>fadeIn</code>, 按钮渐入动画</td>
+</tr>
+<tr>
+<td>keyframesOut</td>
+<td>String</td>
+<td>默认是<code>fadeOut</code>, 按钮渐出动画</td>
+</tr>
+<tr>
+<td>customScrollButton</td>
+<td>dom 元素或类名，id 名</td>
+<td>默认是``,如需自定义，请设置</td>
+</tr>
+<tr>
+<td>mobile</td>
+<td>Boolean</td>
+<td>是否在移动端显示</td>
+</tr>
+</tbody>
+</table>
+<h2>可选的 easingType 列表（https://www.xuanfengge.com/easeing/easeing/)）</h2>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linear</td>
+<td>线性过渡</td>
+</tr>
+<tr>
+<td>easeInQuad</td>
+<td>从零速度加速。</td>
+</tr>
+<tr>
+<td>easeOutQuad</td>
+<td>减速到零速度</td>
+</tr>
+<tr>
+<td>easeInOutQuad</td>
+<td>加速到一半，然后减速</td>
+</tr>
+<tr>
+<td>easeInCubic</td>
+<td>从零速度加速。</td>
+</tr>
+<tr>
+<td>easeOutCubic</td>
+<td>减速到零速度</td>
+</tr>
+<tr>
+<td>easeInOutCubic</td>
+<td>加速到一半，然后减速</td>
+</tr>
+<tr>
+<td>easeInQuart</td>
+<td>从零速度加速。</td>
+</tr>
+<tr>
+<td>easeOutQuart</td>
+<td>减速到零速度</td>
+</tr>
+<tr>
+<td>easeInOutQuart</td>
+<td>加速到一半，然后减速。</td>
+</tr>
+<tr>
+<td>easeInQuint</td>
+<td>从零速度加速。</td>
+</tr>
+<tr>
+<td>easeOutQuint</td>
+<td>减速到零速度</td>
+</tr>
+<tr>
+<td>easeInOutQuint</td>
+<td>加速到一半，然后减速。</td>
+</tr>
+</tbody>
+</table>
+<h2>销毁</h2>
+<pre><code>scrollToUp.destroyed()
+</code></pre>
+<h2>回调事件</h2>
+<table>
+<thead>
+<tr>
+<th>事件名称</th>
+<th>描述</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>startScrollCallBack</td>
+<td>开始滚动</td>
+<td>(1)defaultOptions 基本配置 （2）buttom 节点</td>
+</tr>
+<tr>
+<td>endScrollCallBack</td>
+<td>正在滚动</td>
+<td>(1)defaultOptions 基本配置 （2）buttom 节点</td>
+</tr>
+<tr>
+<td>endScrollCallBack</td>
+<td>结束滚动</td>
+<td>(1)defaultOptions 基本配置 （2）buttom 节点</td>
+</tr>
+</tbody>
+</table>
+
+        </div>
+    </div>
+</body>
+
+</html>

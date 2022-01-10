@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>scrollToUp</title>
-  <link rel="stylesheet" type="text/css" href="./__build__/app.css" />
+  <link rel="stylesheet" href="<%=css%>" rel="preload" as="css" />
   <style>
     html,
     body {
@@ -65,7 +65,7 @@
       </p>
     </div>
   </div>
-  <script src="./__build__/app.js"></script>
+  <script src="<%=js%>" rel="preload" as="script"></script>
   <script>
     new scrollToUp({
       scrollContainer: '.container',
