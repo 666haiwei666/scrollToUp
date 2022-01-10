@@ -16,7 +16,7 @@
  
 
 ```bash
-npm install scroll-to-up --save
+npm install scrolltoup --save
 ```
  
 
@@ -25,7 +25,7 @@ npm install scroll-to-up --save
  
 
 ```bash
-import scrollToUp from 'scroll-to-up'
+import scrollToUp from 'scrolltoup'
 ```
  
 
